@@ -1,4 +1,4 @@
-# Project Name: RealEstate
+# Real Estate
 
 ## Description:
 RealEstate is a web application designed to manage real estate sales and rentals. This platform allows users to view property listings, search, list their properties, and apply for listings. The project is developed using ASP.NET Core 8.0, API, and Dapper technologies.
@@ -26,6 +26,14 @@ RealEstate is a web application designed to manage real estate sales and rentals
 - Continuous improvements and optimizations are made to controllers, services, DTOs, and database operations in both API and UI sections.
 - The project structure and content may be updated periodically to accommodate requirements and project growth.
 - Regular code reviews and testing are conducted to ensure project quality and steady progress.
+
+## Technologies Used:
+- Visual Studio
+- C#
+- ASP.NET Core 8.0
+- API
+- Dapper
+- SQL Server Management Studio
 
 ## More to Come:
 The project is still under development and will be continuously updated with new features and enhancements. Stay tuned!
