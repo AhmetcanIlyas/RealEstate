@@ -1,8 +1,8 @@
 ﻿@model CreateProductDto
 
 @{
-    ViewData["Title"] = "CreateProduct";
-    Layout = "~/Views/Admin/Index.cshtml";
+    ViewData["Title"] = "CreateAdvert";
+    Layout = "~/Areas/EstateAgent/Views/LayoutEstateAgent/Index.cshtml";
 }
 
 <div class="container-fluid pt-4 px-4">
@@ -24,18 +24,21 @@
                     @Html.DropDownListFor(x => x.ProductCategory, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
                     <br />
                     <label>Fiyat</label>
-                    <input type="text" asp-for="Title" class="form-control" />
+                    <input type="text" asp-for="Price" class="form-control" />
                     <br />
                     <label>Tür</label>
-                    @Html.DropDownListFor(x => x.ProductType, (List<SelectListItem>)ViewBag.t, new { @class = "form-control" })
+                    <input type="text" asp-for="ProductType" class="form-control" />
                     <br />
                     <label>Kapak Fotoğrafı</label>
-                    <input type="text" asp-for="Title" class="form-control" />
+                    <input type="text" asp-for="CoverImage" class="form-control" />
                     <br />
                     <label>İlan Açık Adresi</label>
                     <textarea asp-for="Address" class="form-control" rows="5"></textarea>
                     <br />
-                    <button class="btn btn-primary">İlanı Kaydet</button>
+                    <label>İlan Açıklaması</label>
+                    <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                    <br />
+                    <button class="btn btn-primary">İlanı Oluştur</button>
                 </form>
             </div>
         </div>
