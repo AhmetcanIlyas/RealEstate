@@ -99,9 +99,9 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async Task<GetProductByProductIDDto> GetProductByProductIDDto(int id)
+        public async Task<GetProductByProductIDDto> GetProductByProductID(int id)
         {
-            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,CoverImage,TypeName,Address,DealOfTheDay FROM Product INNER JOIN " +
+            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,Description,CoverImage,TypeName,Address,DealOfTheDay,AdvertisementDate FROM Product INNER JOIN " +
                 "Category ON Product.ProductCategory = Category.CategoryID INNER JOIN Type ON Product.ProductType = Type.TypeID where ProductID=@productID";
             var parameters = new DynamicParameters();
             parameters.Add("@productID", id);
@@ -112,7 +112,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async Task<GetProductDetailByIDDto> GetProductDetailByProductIDDto(int id)
+        public async Task<GetProductDetailByIDDto> GetProductDetailByProductID(int id)
         {
             string query = "SELECT * From ProductDetails Where ProductID=@productID";
             var parameters = new DynamicParameters();

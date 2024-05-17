@@ -15,10 +15,10 @@ namespace RealEstate_Dapper_Api.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet("GetProductDetailByProductIDDto")]
-        public async Task<IActionResult> GetProductDetailByProductIDDto(int id)
+        [HttpGet("GetProductDetailByProductID")]
+        public async Task<IActionResult> GetProductDetailByProductID(int id)
         {
-            var values = await _productRepository.GetProductDetailByProductIDDto(id);
+            var values = await _productRepository.GetProductDetailByProductID(id);
             return Ok(values);
         }
     }
