@@ -51,11 +51,22 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
         {
-            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,CoverImage,TypeName,Address,DealOfTheDay FROM Product " +
+            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,CoverImage,TypeName,Address,DealOfTheDay,SlugUrl FROM Product " +
                 "INNER JOIN Category ON Product.ProductCategory = Category.CategoryID INNER JOIN Type ON Product.ProductType = Type.TypeID";
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+                return values.ToList();
+            }
+        }
+
+        public async Task<List<ResultLast3ProductWithCategoryDto>> GetLast3ProductAsync()
+        {
+            string query = "SELECT Top(3) ProductID,Title,Price,City,District,CategoryName,TypeName,AdvertisementDate,CoverImage,Description FROM Product " +
+                "INNER JOIN Category ON Product.ProductCategory = Category.CategoryID INNER JOIN Type ON Product.ProductType = Type.TypeID ORDER BY ProductID DESC";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultLast3ProductWithCategoryDto>(query);
                 return values.ToList();
             }
         }
@@ -99,9 +110,20 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async Task<GetProductByProductIDDto> GetProductByProductID(int id)
+		public async Task<List<ResultProductWithCategoryDto>> GetProductByDealOfTheDayTrueWithCategoryAsync()
+		{
+			string query = "SELECT ProductID,Title,Price,City,District,CategoryName,CoverImage,TypeName,Address,DealOfTheDay FROM Product " +
+				"INNER JOIN Category ON Product.ProductCategory = Category.CategoryID INNER JOIN Type ON Product.ProductType = Type.TypeID Where DealOfTheDay=1";
+			using (var connection = _context.CreateConnection())
+			{
+				var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+				return values.ToList();
+			}
+		}
+
+		public async Task<GetProductByProductIDDto> GetProductByProductID(int id)
         {
-            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,Description,CoverImage,TypeName,Address,DealOfTheDay,AdvertisementDate FROM Product INNER JOIN " +
+            string query = "SELECT ProductID,Title,Price,City,District,CategoryName,Description,CoverImage,TypeName,Address,DealOfTheDay,AdvertisementDate,SlugUrl FROM Product INNER JOIN " +
                 "Category ON Product.ProductCategory = Category.CategoryID INNER JOIN Type ON Product.ProductType = Type.TypeID where ProductID=@productID";
             var parameters = new DynamicParameters();
             parameters.Add("@productID", id);
@@ -143,6 +165,20 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task<List<ResultProductWithSearchListDto>> ResultProductWithSearchList(string searchKeyValue, int propertyCategortyID, string city)
+        {
+            string query = "Select * From Product Where Title like '%" + searchKeyValue + "%' And ProductCategory=@propertyCategortyID And City=@city";
+            var parameters = new DynamicParameters();
+            parameters.Add("@searchKeyValue", searchKeyValue);
+            parameters.Add("@propertyCategortyID", propertyCategortyID);
+            parameters.Add("@city", city);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductWithSearchListDto>(query, parameters);
+                return values.ToList();
             }
         }
     }

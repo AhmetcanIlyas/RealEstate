@@ -27,10 +27,27 @@ namespace RealEstate_Dapper_UI.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> PropertySingle(int id)
+        public async Task<IActionResult> PropertyListWithSearch(string searchKeyValue, int propertyCategortyID, string city)
         {
-            id = 1;
+			searchKeyValue = TempData["searchKeyValue"].ToString();
+			propertyCategortyID = int.Parse(TempData["propertyCategortyID"].ToString());
+            city = TempData["city"].ToString();
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:44331/api/Products/ResultProductWithSearchList?" +
+                $"searchKeyValue={searchKeyValue}&propertyCategortyID={propertyCategortyID}&city={city}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultProductWithSearchListDto>>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+
+        [HttpGet("property/{slug}/{id}")]
+        public async Task<IActionResult> PropertySingle(string slug, int id)
+        {
+            ViewBag.i = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:44331/api/Products/GetProductByProductID?id=" + id);
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -49,6 +66,7 @@ namespace RealEstate_Dapper_UI.Controllers
             ViewBag.typeName = values.typeName;
             ViewBag.description = values.description;
             ViewBag.advertisementDate = values.advertisementDate;
+            ViewBag.slugUrl = values.slugUrl;
 
             ViewBag.bathCount = values2.bathCount;
             ViewBag.bedRoomCount = values2.bedRoomCount;
@@ -56,11 +74,26 @@ namespace RealEstate_Dapper_UI.Controllers
             ViewBag.roomCount = values2.roomCount;
             ViewBag.garageCount = values2.garageSize;
             ViewBag.buildYear = values2.buildYear;
+            ViewBag.location = values2.location;
+            ViewBag.videoUrl = values2.videoUrl;
 
             DateTime date = values.advertisementDate;
             ViewBag.datediff = (DateTime.Now.Year - date.Year) * 12 + DateTime.Now.Month - date.Month;
 
+            string slugFromTitle = CreateSlug(values.title);
+            ViewBag.slugUrl = slugFromTitle;
+
             return View();
+        }
+
+        private string CreateSlug(string title)
+        {
+            title = title.ToLowerInvariant(); // Küçük harfe çevir
+            title = title.Replace(" ", "-"); // Boşlukları tire ile değiştir
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"[^a-z0-9\s-]", ""); // Geçersiz karakterleri kaldır
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"\s+", " ").Trim(); // Birden fazla boşluğu tek boşluğa indir ve kenar boşluklarını kaldır
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"\s", "-"); // Boşlukları tire ile değiştir
+            return title;
         }
     }
 }

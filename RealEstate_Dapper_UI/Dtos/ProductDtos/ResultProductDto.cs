@@ -12,6 +12,7 @@
         public string description { get; set; }
         public string typeName { get; set; }
         public string address { get; set; }
+        public string slugUrl { get; set; }
         public bool dealOfTheDay { get; set; }
         public DateTime advertisementDate { get; set; }
     }

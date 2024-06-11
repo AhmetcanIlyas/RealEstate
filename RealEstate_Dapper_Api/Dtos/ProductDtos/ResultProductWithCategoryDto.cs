@@ -10,6 +10,7 @@
         public string CategoryName { get; set; }
         public string CoverImage { get; set; }
         public string TypeName { get; set; }
+        public string SlugUrl { get; set; }
         public string Address { get; set; }
         public bool DealOfTheDay { get; set; }
     }
