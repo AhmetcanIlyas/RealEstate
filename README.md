@@ -1,7 +1,7 @@
 # Real Estate
 
 ## Description:
-RealEstate is a web application designed to manage real estate sales and rentals. This platform allows users to view property listings, search, list their properties, and apply for listings. The project is developed using ASP.NET Core 8.0, API, and Dapper technologies.
+RealEstate is a web application designed to manage real estate sales and rentals. This platform allows users to view property listings, search, list their properties, and apply for listings. The project is developed using ASP.NET Core 8.0, API, and Dapper technologies. You can see the project pictures at the end.
 
 ## Usage:
 1. Download or clone the project.
@@ -40,3 +40,37 @@ The project is still under development and will be continuously updated with new
 
 ## Thanks for Contributing!
 Thanks to all contributors who have contributed to this project!
+
+### Project Images
+<table>
+  <tr>
+    <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/ui.png" alt="Home Page" width="500">
+      <p><strong>Home Page</strong></p>
+    </td>
+    <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/popular_locations.png" alt="Popular Locations" width="500">
+      <p><strong>Popular Locations</strong></p>
+    </td>
+  </tr>
+  <tr>
+     <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/fovarite_property.png" alt="Favorite Property" width="500">
+      <p><strong>Favorite Property</strong></p>
+    </td>
+    <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/last_3_property.png" alt="Last 3 Property" width="500">
+      <p><strong>Last 3 Property</strong></p>
+    </td>
+  </tr>
+  <tr>
+     <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/admin_panel.png" alt="Admin Panel" width="500">
+      <p><strong>Admin Panel</strong></p>
+    </td>
+    <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/api.png" alt="API" width="500">
+      <p><strong>API</strong></p>
+    </td>
+  </tr>
+</table>
