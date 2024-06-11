@@ -74,3 +74,11 @@ Thanks to all contributors who have contributed to this project!
     </td>
   </tr>
 </table>
+<table align="center">
+  <tr>
+     <td align="center" style="border: none;">
+      <img src="RealEstate_Dapper_UI/wwwroot/projectImages/database.png" alt="database" width="650">
+      <p><strong>Database</strong></p>
+    </td>
+  </tr>
+</table>
